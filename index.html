@@ -473,7 +473,11 @@
         </a>
       </div>
 
-      <form class="card-l form-l reveal-l">
+      <form class="card-l form-l reveal-l" id="contact-form">
+        <input type="hidden" name="access_key" value="c35550e9-a9f9-420f-913b-888af0fa3e24" />
+        <input type="hidden" name="subject" value="New message from portfolio" />
+        <input type="hidden" name="from_name" value="Portfolio Contact Form" />
+        <input type="checkbox" name="botcheck" style="display:none" />
         <div class="form-l__row">
           <div class="field-l">
             <label for="ln-name">Your name</label>
@@ -495,6 +499,7 @@
         <button class="form-l__submit" type="submit">
           Send message <span aria-hidden="true">&rarr;</span>
         </button>
+        <div class="form-l__status" style="display:none; font-size:13px; margin-top:4px;"></div>
       </form>
     </div>
   </section>
@@ -633,19 +638,39 @@
 })();
 
 (function () {
-  const form = document.querySelector('.form-l');
+  const form = document.getElementById('contact-form');
   if (!form) return;
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('.form-l__submit');
+    const status = form.querySelector('.form-l__status');
     const original = btn.innerHTML;
-    btn.classList.add('is-sent');
-    btn.innerHTML = '<span>Message sent &#10003;</span>';
-    setTimeout(() => {
-      btn.classList.remove('is-sent');
+    btn.disabled = true;
+    btn.innerHTML = '<span>Sending...</span>';
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.classList.add('is-sent');
+        btn.innerHTML = '<span>Message sent &#10003;</span>';
+        form.reset();
+        status.style.display = 'none';
+        setTimeout(() => { btn.classList.remove('is-sent'); btn.innerHTML = original; btn.disabled = false; }, 3000);
+      } else {
+        throw new Error(data.message || 'Something went wrong');
+      }
+    } catch (err) {
       btn.innerHTML = original;
-      form.reset();
-    }, 2400);
+      btn.disabled = false;
+      status.textContent = 'Failed to send. Please email me directly.';
+      status.style.display = 'block';
+      status.style.color = '#E85D2A';
+      setTimeout(() => { status.style.display = 'none'; }, 5000);
+    }
   });
 })();
 
