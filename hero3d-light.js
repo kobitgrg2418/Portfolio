@@ -2,10 +2,11 @@ import * as THREE from 'three';
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 
 const container = document.getElementById('hero3d');
+const isMobile = window.innerWidth <= 768 || matchMedia('(pointer: coarse)').matches;
 if (container && THREE) {
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: isMobile ? 'default' : 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -130,6 +131,18 @@ if (container && THREE) {
       scene.remove(loadingMesh);
       scene.add(fbx);
       model = fbx;
+
+      /* Fade-in the model by scaling up from 0 */
+      const finalScale = fbx.scale.x;
+      fbx.scale.setScalar(finalScale * 0.85);
+      const startTime = clock.elapsedTime;
+      const entrance = () => {
+        const p = Math.min((clock.elapsedTime - startTime) / 0.8, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        fbx.scale.setScalar(finalScale * (0.85 + 0.15 * ease));
+        if (p < 1) requestAnimationFrame(entrance);
+      };
+      entrance();
     },
     undefined,
     (err) => {
@@ -145,6 +158,7 @@ if (container && THREE) {
     if (!w || !h) return;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
+    camera.fov = w < 560 ? 36 : w < 768 ? 32 : 28;
     camera.updateProjectionMatrix();
   }
   resize();
@@ -155,6 +169,13 @@ if (container && THREE) {
     mx = (e.clientX / window.innerWidth) * 2 - 1;
     my = -((e.clientY / window.innerHeight) * 2 - 1);
   });
+  if (isMobile) {
+    window.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      mx = (t.clientX / window.innerWidth) * 2 - 1;
+      my = -((t.clientY / window.innerHeight) * 2 - 1);
+    }, { passive: true });
+  }
 
   function tick() {
     const dt = clock.getDelta();
@@ -167,6 +188,7 @@ if (container && THREE) {
 
     if (model) {
       model.rotation.y = tx * 0.35 + Math.sin(t * 0.3) * 0.07;
+      model.position.y += Math.sin(t * 0.8) * 0.0008; /* subtle float */
     }
     if (loadingMesh.parent === scene) {
       loadingMesh.rotation.y = t * 1.2;
