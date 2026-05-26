@@ -1,280 +1,639 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kobit Gurung — AI / ML Engineer. Computer Vision, 3D Reconstruction, and Machine Learning." />
-  <title>Kobit Gurung — AI / ML Engineer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-          colors: {
-            brand: { 50: '#f0f7ff', 100: '#e0effe', 200: '#bae0fd', 400: '#47a3f3', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af' },
-            surface: { 50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5', 800: '#262626', 900: '#171717' }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .skill-tag { transition: all 0.2s ease; }
-    .skill-tag:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .nav-link { position: relative; }
-    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #2563eb; transition: width 0.3s ease; }
-    .nav-link:hover::after { width: 100%; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Kobit Gurung — AI / ML + Full Stack Developer</title>
+<meta name="description" content="Kobit Gurung — AI/ML + Full Stack Developer. Computer vision, deep learning and intelligent systems." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="styles-light.css" />
 </head>
-<body class="bg-white text-surface-900 antialiased">
+<body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-lg border-b border-surface-200/60">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="#" class="text-lg font-semibold tracking-tight text-surface-900">KG<span class="text-brand-500">.</span></a>
-      <div class="hidden sm:flex items-center gap-8">
-        <a href="#about" class="nav-link text-sm font-medium text-surface-800/70 hover:text-surface-900">About</a>
-        <a href="#projects" class="nav-link text-sm font-medium text-surface-800/70 hover:text-surface-900">Projects</a>
-        <a href="#skills" class="nav-link text-sm font-medium text-surface-800/70 hover:text-surface-900">Skills</a>
-        <a href="#contact" class="nav-link text-sm font-medium text-surface-800/70 hover:text-surface-900">Contact</a>
+<!-- Cursor + scroll progress -->
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring"></div>
+  <div class="cursor__dot"></div>
+</div>
+<div class="scroll-progress-l"></div>
+
+<!-- Paper texture overlay -->
+<div class="paper" aria-hidden="true"></div>
+
+<!-- Nav -->
+<a href="#top" class="nav-l">
+  <span class="nav-l__dot"></span>
+  kobit gurung
+</a>
+<div class="status">
+  <span class="status__dot"></span>
+  Available for work · 2026
+</div>
+<nav class="nav-r" aria-label="Primary">
+  <a href="#about">About</a>
+  <a href="#work">Work</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" data-screen-label="01 Hero">
+    <!-- Watermarks -->
+    <span class="hero__watermark">KOBIT</span>
+    <span class="hero__watermark--sub">AI / ML</span>
+
+    <!-- 3D robot canvas -->
+    <div class="hero__scene" id="hero3d"></div>
+
+    <!-- Centered text overlay -->
+    <div class="hero__overlay">
+      <div class="hero__tagline">AI / ML · Full Stack · Computer Vision</div>
+      <h1 class="hero__title">
+        <span class="row"><span class="word">Hello,</span> <span class="word">I'm</span></span>
+        <span class="row"><span class="word">Kobit.</span></span>
+      </h1>
+      <div class="hero__cta">
+        <a class="btn-l btn-l--primary" href="#work">View My Work <span class="btn-l__arrow">&rarr;</span></a>
+        <a class="btn-l btn-l--ghost" href="Kobit_Gurung_CV.pdf" target="_blank" rel="noopener">View R&eacute;sum&eacute; <span class="btn-l__arrow">&nearr;</span></a>
       </div>
-      <a href="https://github.com/kobitgrg2418" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm font-medium text-surface-800/70 hover:text-surface-900 transition-colors">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
+    </div>
+
+    <!-- Bottom strip -->
+    <div class="hero__strip">
+      <div class="hero__strip-l">
+        <p>// currently building</p>
+        <p>VivaPrep AI — a study OS that turns lecture PDFs into quizzes, flashcards &amp; RAG-powered chat.</p>
+      </div>
+      <a class="hero__strip-r" href="#contact">
+        <span class="hero__strip-r__dot"></span>
+        Open to opportunities
       </a>
     </div>
-  </nav>
+  </section>
 
-  <!-- ===== HERO ===== -->
-  <section class="relative min-h-screen overflow-hidden bg-[#f0f0ee]">
-    <video
-      autoplay muted loop playsinline
-      class="absolute inset-0 w-full h-full object-cover"
-      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
-    ></video>
-    <div class="relative z-10 flex flex-col min-h-screen">
-      <div class="flex-1 flex items-end pb-10 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-20 lg:px-28">
-        <div class="fade-up max-w-xs">
-          <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm text-brand-600 text-xs font-medium px-3 py-1.5 rounded-full mb-4">
-            <span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse"></span>
-            Open to opportunities
+  <!-- ============ ABOUT ============ -->
+  <section class="section-l" id="about" data-screen-label="02 About">
+    <div class="about-l">
+      <div class="reveal-l">
+        <span class="eyebrow-l">About · 01</span>
+        <h2 class="section-title-l">A student-builder turning <em>curiosity</em> into shipped software.</h2>
+      </div>
+
+      <div class="about-l__body reveal-l">
+        <p>
+          I'm passionate about software development, AI/ML, and building technology that creates real impact.
+          I enjoy exploring how modern systems are designed — from crafting responsive full-stack apps
+          to developing intelligent AI-driven solutions.
+        </p>
+        <p>
+          What excites me most is the ability to adapt and learn across different areas of technology —
+          frontend, backend architecture, UI/UX, or machine learning. I solve problems by combining
+          creativity with technical thinking.
+        </p>
+        <p>
+          Driven by curiosity, I aim to build digital experiences that are not only functional but also
+          smart, intuitive, and meaningful.
+        </p>
+
+        <div class="about-l__stats reveal-l-stagger">
+          <div class="stat-l">
+            <div class="stat-l__num">1</div>
+            <div class="stat-l__label">AI product in beta</div>
           </div>
-          <h1 class="text-[1.5rem] sm:text-[1.75rem] leading-[1.15] font-medium text-gray-900 tracking-tight mb-3">
-            Hi, I'm Kobit Gurung — AI / ML Student building intelligent systems.
-          </h1>
-          <p class="text-[13px] text-gray-400 font-normal mb-3">
-            Computer vision, deep learning, and beyond.
+          <div class="stat-l">
+            <div class="stat-l__num">15+</div>
+            <div class="stat-l__label">Tools &amp; frameworks</div>
+          </div>
+          <div class="stat-l">
+            <div class="stat-l__num">&infin;</div>
+            <div class="stat-l__label">Curiosity loops</div>
+          </div>
+        </div>
+
+        <div class="tech-cloud" style="margin-top: 32px;">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">PyTorch</span>
+          <span class="tech-chip">TensorFlow</span>
+          <span class="tech-chip">OpenCV</span>
+          <span class="tech-chip">React</span>
+          <span class="tech-chip">Tailwind</span>
+          <span class="tech-chip">JavaScript</span>
+          <span class="tech-chip">Java</span>
+          <span class="tech-chip">JSP / Servlets</span>
+          <span class="tech-chip">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section-l" id="skills" data-screen-label="03 Skills">
+    <div class="reveal-l">
+      <span class="eyebrow-l">Toolkit · 02</span>
+      <h2 class="section-title-l">Tools &amp; technologies <em>I build with.</em></h2>
+      <p class="section-sub-l">A focused stack across the four disciplines I work in most.</p>
+    </div>
+
+    <div class="skills-l__grid reveal-l-stagger">
+      <article class="card-l skill-l">
+        <div class="skill-l__num">// 01</div>
+        <div class="skill-l__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h6M15 12h6M12 3v6M12 15v6" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <h3 class="skill-l__name">AI / ML</h3>
+        <ul class="skill-l__list">
+          <li>Python</li>
+          <li>TensorFlow</li>
+          <li>PyTorch</li>
+          <li>OpenCV</li>
+          <li>NumPy</li>
+          <li>Scikit-learn</li>
+        </ul>
+      </article>
+
+      <article class="card-l skill-l">
+        <div class="skill-l__num">// 02</div>
+        <div class="skill-l__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 8h18M9 20h6" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <h3 class="skill-l__name">Frontend</h3>
+        <ul class="skill-l__list">
+          <li>React</li>
+          <li>JavaScript</li>
+          <li>Tailwind CSS</li>
+          <li>HTML / CSS</li>
+        </ul>
+      </article>
+
+      <article class="card-l skill-l">
+        <div class="skill-l__num">// 03</div>
+        <div class="skill-l__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="18" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/><circle cx="7" cy="17" r="0.8" fill="currentColor"/></svg>
+        </div>
+        <h3 class="skill-l__name">Backend</h3>
+        <ul class="skill-l__list">
+          <li>Java</li>
+          <li>JSP / Servlets</li>
+          <li>REST APIs</li>
+          <li>RAG pipelines</li>
+        </ul>
+      </article>
+
+      <article class="card-l skill-l">
+        <div class="skill-l__num">// 04</div>
+        <div class="skill-l__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="skill-l__name">Tools</h3>
+        <ul class="skill-l__list">
+          <li>Git / GitHub</li>
+          <li>VS Code</li>
+          <li>IntelliJ IDEA</li>
+          <li>Vercel</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section class="section-l" id="work" data-screen-label="04 Work">
+    <div class="projects-l__head reveal-l">
+      <div>
+        <span class="eyebrow-l">Selected work · 03</span>
+        <h2 class="section-title-l">Things I've <em>shipped</em> &amp; what's next.</h2>
+        <p class="section-sub-l">A focused look at what I'm building right now — and the projects forming on the bench.</p>
+      </div>
+      <div class="projects-l__nav">
+        <button class="proj-nav-btn" data-proj="prev" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 13L5 8l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="proj-nav-btn" data-proj="next" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="projects-l__strip">
+
+      <a class="project-l" href="https://quiz-three-cyan.vercel.app/" target="_blank" rel="noopener">
+        <div class="project-l__media">
+          <div class="project-l__media-grid"></div>
+          <div class="project-l__media-content">
+            <div class="project-l__bar">
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-url">vivaprep.ai · /study</span>
+            </div>
+            <div class="project-l__line wide"></div>
+            <div class="project-l__line med"></div>
+            <div class="project-l__block"></div>
+            <div class="project-l__line short"></div>
+            <div class="project-l__line med"></div>
+          </div>
+        </div>
+        <div class="project-l__body">
+          <div class="project-l__tags">
+            <span class="project-l__tag">AI / ML</span>
+            <span class="project-l__tag">Full Stack</span>
+            <span class="project-l__tag">EdTech</span>
+          </div>
+          <h3 class="project-l__title">VivaPrep AI — Smart Study Platform</h3>
+          <p class="project-l__desc">
+            An AI-powered study tool that turns lecture PDFs into interactive quizzes, flashcards, viva questions
+            and interview prep — grounded in your source material with RAG-powered chat and study analytics.
           </p>
-          <div class="flex flex-wrap items-center gap-3">
-            <a href="#projects" class="inline-flex items-center gap-2 text-[13px] font-medium text-brand-500 border border-brand-400 rounded-full px-5 py-2.5 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-200 group">
-              View my work
-              <span class="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
-            </a>
-            <a href="Kobit_Gurung_CV.pdf" download class="inline-flex items-center gap-2 text-[13px] font-medium text-gray-700 bg-white/80 backdrop-blur-sm border border-gray-300 rounded-full px-5 py-2.5 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200 group">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
-              Download CV
-            </a>
+          <div class="project-l__meta">
+            <span>Public beta · 2026</span>
+            <span class="project-l__link">Visit live &rarr;</span>
           </div>
         </div>
-      </div>
+      </a>
+
+      <a class="project-l" href="#" data-hover>
+        <div class="project-l__media">
+          <div class="project-l__media-grid"></div>
+          <div class="project-l__media-content">
+            <div class="project-l__bar">
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-url">notebook · cv-pipeline.ipynb</span>
+            </div>
+            <div class="project-l__line short"></div>
+            <div class="project-l__block"></div>
+            <div class="project-l__line wide"></div>
+            <div class="project-l__line med"></div>
+            <div class="project-l__line short"></div>
+          </div>
+        </div>
+        <div class="project-l__body">
+          <div class="project-l__tags">
+            <span class="project-l__tag">Computer Vision</span>
+            <span class="project-l__tag">PyTorch</span>
+          </div>
+          <h3 class="project-l__title">Vision Lab — image &amp; object pipelines</h3>
+          <p class="project-l__desc">
+            A growing collection of computer-vision experiments — segmentation, 3D reconstruction
+            prototypes and OpenCV-driven preprocessing notebooks.
+          </p>
+          <div class="project-l__meta">
+            <span>Ongoing · 2025–26</span>
+            <span class="project-l__link">Case study soon &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-l" href="https://github.com/kobitgrg2418" target="_blank" rel="noopener">
+        <div class="project-l__media">
+          <div class="project-l__media-grid"></div>
+          <div class="project-l__media-content">
+            <div class="project-l__bar">
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-url">github.com/kobitgrg2418</span>
+            </div>
+            <div class="project-l__line med"></div>
+            <div class="project-l__line wide"></div>
+            <div class="project-l__block"></div>
+            <div class="project-l__line short"></div>
+          </div>
+        </div>
+        <div class="project-l__body">
+          <div class="project-l__tags">
+            <span class="project-l__tag">React</span>
+            <span class="project-l__tag">Java</span>
+            <span class="project-l__tag">JSP</span>
+          </div>
+          <h3 class="project-l__title">Coursework &amp; full-stack experiments</h3>
+          <p class="project-l__desc">
+            A working archive of the apps I build while learning — React frontends, Java/JSP backends,
+            REST endpoints, and small UI systems. Open source on GitHub.
+          </p>
+          <div class="project-l__meta">
+            <span>Public · GitHub</span>
+            <span class="project-l__link">Browse repos &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-l" href="#contact">
+        <div class="project-l__media">
+          <div class="project-l__media-grid"></div>
+          <div class="project-l__media-content">
+            <div class="project-l__bar">
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-dot"></span>
+              <span class="project-l__bar-url">// next.idea</span>
+            </div>
+            <div class="project-l__line wide"></div>
+            <div class="project-l__line med"></div>
+            <div class="project-l__line short"></div>
+            <div class="project-l__block"></div>
+          </div>
+        </div>
+        <div class="project-l__body">
+          <div class="project-l__tags">
+            <span class="project-l__tag">Collab</span>
+            <span class="project-l__tag">Open</span>
+          </div>
+          <h3 class="project-l__title">Your project, here.</h3>
+          <p class="project-l__desc">
+            Got an AI / web idea you're trying to ship? I'm open to internships and freelance
+            collaborations. Let's build something that matters.
+          </p>
+          <div class="project-l__meta">
+            <span>Available · 2026</span>
+            <span class="project-l__link">Start a chat &rarr;</span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="py-24 px-6 bg-surface-50">
-    <div class="max-w-6xl mx-auto">
-      <div class="fade-up max-w-3xl">
-        <p class="text-sm font-medium text-brand-500 mb-3 tracking-wide uppercase">About</p>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-6">A student who is AI Enthusiast & Software Developer </h2>
-        <p class="text-base sm:text-lg text-surface-800/60 leading-relaxed mb-4">
-              I’m a student passionate about software development, AI/ML, and building technology that creates real impact. I enjoy exploring how modern systems are designed — from crafting responsive full-stack applications to developing intelligent AI-driven solutions.
+  <!-- ============ JOURNEY ============ -->
+  <section class="section-l" id="journey" data-screen-label="05 Journey">
+    <div class="reveal-l">
+      <span class="eyebrow-l">Journey · 04</span>
+      <h2 class="section-title-l">A timeline of <em>curiosity</em> &rarr; craft.</h2>
+      <p class="section-sub-l">Where I've been, what I'm learning, and where I'm taking things next.</p>
+    </div>
 
-What excites me most is the ability to adapt and learn across different areas of technology. Whether it’s frontend development, backend architecture, UI/UX design, or machine learning, I enjoy solving problems by combining creativity with technical thinking.</p>
- <p class="text-base sm:text-lg text-surface-800/60 leading-relaxed">
- I’m constantly exploring emerging technologies, experimenting with new tools, and improving my skills through hands-on projects.
+    <div class="timeline-l reveal-l-stagger">
+      <div class="tl-l-item">
+        <span class="tl-l-item__dot"></span>
+        <div class="tl-l-item__meta">2026 · NOW</div>
+        <h3 class="tl-l-item__title">VivaPrep AI — public beta</h3>
+        <div class="tl-l-item__sub">AI study OS · RAG · React + Python</div>
+        <p class="tl-l-item__body">
+          Building a study platform that turns any lecture PDF into quizzes, flashcards, viva questions
+          and a chat grounded in the source — with analytics that track topic mastery over time.
+        </p>
+      </div>
 
-Driven by curiosity and innovation, I aim to build digital experiences that are not only functional but also smart, intuitive, and meaningful.
+      <div class="tl-l-item">
+        <span class="tl-l-item__dot"></span>
+        <div class="tl-l-item__meta">Late 2025</div>
+        <h3 class="tl-l-item__title">Computer Vision &amp; deep learning</h3>
+        <div class="tl-l-item__sub">PyTorch · OpenCV · 3D Reconstruction</div>
+        <p class="tl-l-item__body">
+          Deep-diving into computer vision, model training and 3D reconstruction —
+          the work behind the AI / ML pipelines powering my current projects.
+        </p>
+      </div>
+
+      <div class="tl-l-item">
+        <span class="tl-l-item__dot"></span>
+        <div class="tl-l-item__meta">Mid 2025</div>
+        <h3 class="tl-l-item__title">Full-stack foundations</h3>
+        <div class="tl-l-item__sub">React · Java · JSP / Servlets</div>
+        <p class="tl-l-item__body">
+          Built responsive frontends with React &amp; Tailwind and server-side apps in Java —
+          learning to design end-to-end systems instead of isolated screens.
+        </p>
+      </div>
+
+      <div class="tl-l-item">
+        <span class="tl-l-item__dot"></span>
+        <div class="tl-l-item__meta">Early 2025</div>
+        <h3 class="tl-l-item__title">First lines of code</h3>
+        <div class="tl-l-item__sub">Python · JavaScript · HTML &amp; CSS</div>
+        <p class="tl-l-item__body">
+          Started as a student fascinated by how interfaces and intelligence are designed. Fell in love
+          with the loop of <em>idea &rarr; prototype &rarr; ship</em>, and never really stopped.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ===== PROJECTS ===== -->
-  <section id="projects" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="fade-up mb-16">
-        <p class="text-sm font-medium text-brand-500 mb-3 tracking-wide uppercase">Projects</p>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Selected Work</h2>
+  <!-- ============ CONTACT ============ -->
+  <section class="section-l" id="contact" data-screen-label="06 Contact">
+    <div class="reveal-l">
+      <span class="eyebrow-l">Contact · 05</span>
+      <h2 class="section-title-l">Let's <em>work together.</em></h2>
+      <p class="section-sub-l">
+        I'm always open to new opportunities, collaborations, and interesting conversations.
+        Feel free to reach out — the inbox is always on.
+      </p>
+    </div>
+
+    <div class="contact-l">
+      <div class="reveal-l-stagger">
+        <a class="channel-l" href="mailto:kobitgrg22@gmail.com">
+          <span class="channel-l__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <div class="channel-l__label">// email</div>
+            <div class="channel-l__value">kobitgrg22@gmail.com</div>
+          </div>
+          <span class="channel-l__arrow">&nearr;</span>
+        </a>
+        <a class="channel-l" href="https://github.com/kobitgrg2418" target="_blank" rel="noopener">
+          <span class="channel-l__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.04 1.53 1.04.9 1.53 2.35 1.09 2.93.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.55 9.55 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.33 4.69-4.56 4.94.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          </span>
+          <div>
+            <div class="channel-l__label">// github</div>
+            <div class="channel-l__value">github.com/kobitgrg2418</div>
+          </div>
+          <span class="channel-l__arrow">&nearr;</span>
+        </a>
+        <a class="channel-l" href="https://linkedin.com/in/" target="_blank" rel="noopener">
+          <span class="channel-l__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <div class="channel-l__label">// linkedin</div>
+            <div class="channel-l__value">Let's connect</div>
+          </div>
+          <span class="channel-l__arrow">&nearr;</span>
+        </a>
+        <a class="channel-l" href="Kobit_Gurung_CV.pdf" target="_blank" rel="noopener">
+          <span class="channel-l__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <div class="channel-l__label">// resume</div>
+            <div class="channel-l__value">Download CV</div>
+          </div>
+          <span class="channel-l__arrow">&nearr;</span>
+        </a>
       </div>
 
-      <!-- Project: VivaPrep AI -->
-      <div class="fade-up project-card bg-white rounded-2xl border border-surface-200/80 overflow-hidden shadow-sm">
-        <div class="grid md:grid-cols-2">
-          <div class="relative overflow-hidden flex items-center justify-center min-h-[320px] order-2 md:order-1" style="background: linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #0f172a 100%);">
-            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 60%);"></div>
-            <div class="relative text-center px-6 py-8 w-full">
-              <div class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white/90 text-[9px] font-medium px-2.5 py-1 rounded-full mb-4">
-                <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Now in public beta
-              </div>
-              <h4 class="text-white text-[22px] sm:text-[26px] font-bold leading-tight mb-2">Turn any lecture into a</h4>
-              <h4 class="text-[22px] sm:text-[26px] font-bold leading-tight mb-3" style="background: linear-gradient(90deg, #818cf8, #6366f1, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">study operating system.</h4>
-              <p class="text-[10px] text-white/50 mb-4 max-w-[240px] mx-auto leading-relaxed">Upload a PDF. Get quizzes, flashcards, viva questions, interview prep, and an AI chat.</p>
-              <div class="flex items-center justify-center gap-2">
-                <span class="bg-cyan-400 text-[#0a0e1a] text-[9px] font-semibold px-3 py-1.5 rounded-full">Upload your first PDF</span>
-                <span class="border border-white/20 text-white/80 text-[9px] font-medium px-3 py-1.5 rounded-full">Watch demo</span>
-              </div>
-            </div>
+      <form class="card-l form-l reveal-l">
+        <div class="form-l__row">
+          <div class="field-l">
+            <label for="ln-name">Your name</label>
+            <input id="ln-name" name="name" type="text" placeholder="Ada Lovelace" required />
           </div>
-          <div class="p-8 sm:p-10 flex flex-col justify-center order-1 md:order-2">
-            <div class="flex items-center gap-2 mb-4">
-              <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full">AI / ML</span>
-              <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full">Full Stack</span>
-              <span class="bg-blue-50 text-blue-600 text-xs font-medium px-2.5 py-1 rounded-full">EdTech</span>
-            </div>
-            <h3 class="text-2xl font-bold mb-3">VivaPrep AI — Smart Study Platform</h3>
-            <p class="text-surface-800/60 leading-relaxed mb-6">
-              An AI-powered study tool that turns lecture PDFs into interactive quizzes, flashcards, viva questions, and interview prep — all grounded in your source material with RAG-powered chat and study analytics.
-            </p>
-            <ul class="space-y-2 mb-6 text-sm text-surface-800/60">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                AI quiz generation (MCQ, true/false, scenario-based)
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                Smart flashcards with spaced repetition
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                RAG-powered PDF chat with source citations
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                Study analytics tracking mastery by topic
-              </li>
-            </ul>
-            <a href="https://quiz-three-cyan.vercel.app/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-brand-500 hover:text-brand-600 transition-colors group">
-              Visit Live Site
-              <span class="transition-transform duration-200 group-hover:translate-x-0.5">&rarr;</span>
-            </a>
+          <div class="field-l">
+            <label for="ln-email">Email</label>
+            <input id="ln-email" name="email" type="email" placeholder="ada@studio.com" required />
           </div>
         </div>
-      </div>
+        <div class="field-l">
+          <label for="ln-subject">Subject</label>
+          <input id="ln-subject" name="subject" type="text" placeholder="Internship · collab · just saying hi" />
+        </div>
+        <div class="field-l">
+          <label for="ln-msg">Message</label>
+          <textarea id="ln-msg" name="message" placeholder="Tell me about the idea, the timeline, the constraints..." required></textarea>
+        </div>
+        <button class="form-l__submit" type="submit">
+          Send message <span aria-hidden="true">&rarr;</span>
+        </button>
+      </form>
     </div>
   </section>
 
-  <!-- ===== SKILLS ===== -->
-  <section id="skills" class="py-24 px-6 bg-surface-50">
-    <div class="max-w-6xl mx-auto">
-      <div class="fade-up mb-12">
-        <p class="text-sm font-medium text-brand-500 mb-3 tracking-wide uppercase">Skills</p>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Tools & Technologies</h2>
-      </div>
-      <div class="fade-up grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- AI / ML -->
-        <div>
-          <h3 class="text-sm font-semibold text-surface-900 mb-4 uppercase tracking-wide">AI / ML</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">Python</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">TensorFlow</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">PyTorch</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">OpenCV</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">NumPy</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">Scikit-learn</span>
-          </div>
-        </div>
-        <!-- Web Design & Development -->
-        <div>
-          <h3 class="text-sm font-semibold text-surface-900 mb-4 uppercase tracking-wide">Web Design & Development</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">HTML / CSS</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">JavaScript</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">Tailwind CSS</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">React</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">Java</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">JSP / Servlets</span>
-          </div>
-        </div>
-        <!-- Tools -->
-        <div>
-          <h3 class="text-sm font-semibold text-surface-900 mb-4 uppercase tracking-wide">Tools</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">Git / GitHub</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">VS Code</span>
-            <span class="skill-tag bg-white border border-surface-200/80 text-surface-800/80 text-sm font-medium px-3.5 py-2 rounded-lg">IntelliJ IDEA</span>
-          </div>
-        </div>
-      </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer-l" data-screen-label="07 Footer">
+  <div class="footer-l__inner">
+    <div>
+      <h2 class="footer-l__mark">Kobit<br>Gurung.</h2>
+      <p class="footer-l__tagline">
+        AI/ML student &amp; full-stack developer building intelligent, useful, beautiful software.
+        Currently open to opportunities.
+      </p>
     </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="fade-up max-w-2xl mx-auto text-center">
-        <p class="text-sm font-medium text-brand-500 mb-3 tracking-wide uppercase">Contact</p>
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Let's work together.</h2>
-        <p class="text-lg text-surface-800/60 mb-10">
-          I'm always open to new opportunities, collaborations, and interesting conversations. Feel free to reach out.
-        </p>
-        <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="mailto:kobitgrg22@gmail.com" class="inline-flex items-center gap-2.5 bg-surface-900 text-white text-sm font-medium px-6 py-3 rounded-full hover:bg-surface-800 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            kobitgrg22@gmail.com
-          </a>
-          <a href="https://github.com/kobitgrg2418" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 border border-surface-200 text-surface-800 text-sm font-medium px-6 py-3 rounded-full hover:border-surface-900 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 border border-surface-200 text-surface-800 text-sm font-medium px-6 py-3 rounded-full hover:border-surface-900 transition-colors">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-        </div>
-      </div>
+    <div class="footer-l__col">
+      <h4>Sitemap</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="border-t border-surface-200/60 py-8 px-6">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-surface-800/40">&copy; 2026 Kobit Gurung. All rights reserved.</p>
-      <p class="text-sm text-surface-800/30">Crafted with care.</p>
-    </div>
-  </footer>
-
-  <!-- ===== SCROLL ANIMATIONS ===== -->
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
-
-  <!-- ===== MOBILE NAV ===== -->
-  <div id="mobile-nav" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 sm:hidden">
-    <div class="flex items-center gap-6 bg-surface-900/95 backdrop-blur-lg text-white px-6 py-3 rounded-full shadow-lg">
-      <a href="#about" class="text-xs font-medium opacity-70 hover:opacity-100 transition-opacity">About</a>
-      <a href="#projects" class="text-xs font-medium opacity-70 hover:opacity-100 transition-opacity">Projects</a>
-      <a href="#skills" class="text-xs font-medium opacity-70 hover:opacity-100 transition-opacity">Skills</a>
-      <a href="#contact" class="text-xs font-medium opacity-70 hover:opacity-100 transition-opacity">Contact</a>
+    <div class="footer-l__col">
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://github.com/kobitgrg2418" target="_blank" rel="noopener">GitHub &nearr;</a></li>
+        <li><a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn &nearr;</a></li>
+        <li><a href="mailto:kobitgrg22@gmail.com">Email &nearr;</a></li>
+        <li><a href="Kobit_Gurung_CV.pdf" target="_blank" rel="noopener">Download CV &nearr;</a></li>
+      </ul>
     </div>
   </div>
+  <div class="footer-l__bottom">
+    <span>&copy; 2026 Kobit Gurung. All rights reserved.</span>
+    <span>Crafted with care</span>
+  </div>
+</footer>
+
+<!-- Chat-style CTA -->
+<a class="chat" href="#contact">
+  <span class="chat__dot"></span>
+  Let's chat
+</a>
+
+<!-- ============ Scripts ============ -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="hero3d-light.js"></script>
+<script>
+(function () {
+  const cursor = document.querySelector('.cursor');
+  if (!cursor || matchMedia('(pointer: coarse)').matches) return;
+  const ring = cursor.querySelector('.cursor__ring');
+  const dot = cursor.querySelector('.cursor__dot');
+  let tx = 0, ty = 0, x = 0, y = 0, dx = 0, dy = 0;
+  window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+  (function loop() {
+    x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+    dx += (tx - dx) * 0.5; dy += (ty - dy) * 0.5;
+    ring.style.transform = `translate(${x}px, ${y}px)`;
+    dot.style.transform = `translate(${dx}px, ${dy}px)`;
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, [data-hover], input, textarea')) cursor.classList.add('is-hover');
+    else cursor.classList.remove('is-hover');
+  });
+  document.addEventListener('mousedown', () => cursor.classList.add('is-press'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('is-press'));
+})();
+
+(function () {
+  const bar = document.querySelector('.scroll-progress-l');
+  function update() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = `${(window.scrollY / max) * 100}%`;
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+(function () {
+  const items = document.querySelectorAll('.reveal-l, .reveal-l-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  items.forEach((el) => io.observe(el));
+})();
+
+(function () {
+  const words = document.querySelectorAll('.hero__title .word');
+  words.forEach((w, i) => {
+    w.style.transform = 'translateY(110%)';
+    w.style.transition = `transform 1s cubic-bezier(.2,.85,.2,1) ${0.2 + i * 0.08}s`;
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    words.forEach((w) => { w.style.transform = 'none'; });
+  }));
+})();
+
+(function () {
+  const strip = document.querySelector('.projects-l__strip');
+  const prev = document.querySelector('[data-proj="prev"]');
+  const next = document.querySelector('[data-proj="next"]');
+  if (!strip) return;
+  function step(dir) {
+    const card = strip.querySelector('.project-l');
+    if (!card) return;
+    const w = card.getBoundingClientRect().width + 22;
+    strip.scrollBy({ left: dir * w, behavior: 'smooth' });
+  }
+  prev && prev.addEventListener('click', () => step(-1));
+  next && next.addEventListener('click', () => step(1));
+})();
+
+(function () {
+  const form = document.querySelector('.form-l');
+  if (!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-l__submit');
+    const original = btn.innerHTML;
+    btn.classList.add('is-sent');
+    btn.innerHTML = '<span>Message sent &#10003;</span>';
+    setTimeout(() => {
+      btn.classList.remove('is-sent');
+      btn.innerHTML = original;
+      form.reset();
+    }, 2400);
+  });
+})();
+</script>
 
 </body>
 </html>
