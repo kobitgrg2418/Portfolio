@@ -62,6 +62,11 @@
       </div>
     </div>
 
+    <!-- Scroll indicator -->
+    <div class="hero__scroll" aria-hidden="true">
+      <div class="hero__scroll-line"></div>
+    </div>
+
     <!-- Bottom strip -->
     <div class="hero__strip">
       <div class="hero__strip-l">
@@ -538,6 +543,16 @@
   Let's chat
 </a>
 
+<!-- Mobile bottom nav -->
+<div class="mobile-nav" aria-label="Mobile navigation">
+  <div class="mobile-nav__inner">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
 <!-- ============ Scripts ============ -->
 <script type="importmap">
 {
@@ -632,6 +647,37 @@
       form.reset();
     }, 2400);
   });
+})();
+
+// Active nav highlighting
+(function () {
+  const sections = document.querySelectorAll('.section-l[id]');
+  const navLinks = document.querySelectorAll('.nav-r a, .mobile-nav a');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        const id = en.target.id;
+        navLinks.forEach((l) => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -40% 0px' });
+  sections.forEach((s) => io.observe(s));
+})();
+
+// Hide scroll indicator after first scroll
+(function () {
+  const el = document.querySelector('.hero__scroll');
+  if (!el) return;
+  let hidden = false;
+  window.addEventListener('scroll', () => {
+    if (!hidden && window.scrollY > 100) {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.6s';
+      hidden = true;
+    }
+  }, { passive: true });
 })();
 </script>
 
