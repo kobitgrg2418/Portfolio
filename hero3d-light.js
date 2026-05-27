@@ -188,7 +188,6 @@ if (container && THREE) {
 
     if (model) {
       model.rotation.y = tx * 0.35 + Math.sin(t * 0.3) * 0.07;
-      model.position.y += Math.sin(t * 0.8) * 0.0008; /* subtle float */
     }
     if (loadingMesh.parent === scene) {
       loadingMesh.rotation.y = t * 1.2;
