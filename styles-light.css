@@ -529,6 +529,26 @@ button { font-family: inherit; cursor: none; }
 .project-l__line.short { width: 30%; }
 .project-l__block { height: 32px; border-radius: 6px; background: rgba(255,255,255,0.06); margin-top: 4px; }
 
+/* Dev-phase project card highlight */
+.project-l--dev { border-color: rgba(232, 93, 42, 0.25); }
+.project-l--dev:hover { border-color: rgba(232, 93, 42, 0.45); }
+.project-l--dev .project-l__media {
+  background: linear-gradient(135deg, #E8E0D4, #D4CBC0);
+}
+.project-l__badge {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  padding: 5px 12px; border-radius: var(--r-pill);
+  box-shadow: 0 4px 12px -4px rgba(232, 93, 42, 0.4);
+  animation: badgePulse 2.5s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 4px 12px -4px rgba(232, 93, 42, 0.4); }
+  50% { box-shadow: 0 4px 18px -4px rgba(232, 93, 42, 0.65); }
+}
+
 .project-l__body { padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .project-l__tags { display: flex; gap: 6px; flex-wrap: wrap; }
 .project-l__tag {
