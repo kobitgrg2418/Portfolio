@@ -529,6 +529,22 @@ button { font-family: inherit; cursor: none; }
 .project-l__line.short { width: 30%; }
 .project-l__block { height: 32px; border-radius: 6px; background: rgba(255,255,255,0.06); margin-top: 4px; }
 
+/* Featured / handcrafted project card highlight */
+.project-l--featured { border-color: rgba(139, 90, 43, 0.3); }
+.project-l--featured:hover { border-color: rgba(139, 90, 43, 0.55); }
+.project-l--featured .project-l__media {
+  background: linear-gradient(135deg, #F5E6D3, #E8D5BE, #D4C4A8);
+}
+.project-l__badge--art {
+  background: linear-gradient(135deg, #8B5A2B, #A0522D) !important;
+  box-shadow: 0 4px 12px -4px rgba(139, 90, 43, 0.5) !important;
+}
+@keyframes badgePulseArt {
+  0%, 100% { box-shadow: 0 4px 12px -4px rgba(139, 90, 43, 0.4); }
+  50% { box-shadow: 0 4px 18px -4px rgba(139, 90, 43, 0.7); }
+}
+.project-l__badge--art { animation: badgePulseArt 2.5s ease-in-out infinite; }
+
 /* Dev-phase project card highlight */
 .project-l--dev { border-color: rgba(232, 93, 42, 0.25); }
 .project-l--dev:hover { border-color: rgba(232, 93, 42, 0.45); }
