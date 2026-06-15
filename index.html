@@ -231,7 +231,7 @@
 
     <div class="projects-l__strip">
 
-      <a class="project-l project-l--featured" href="https://duluwa-art.vercel.app/" target="_blank" rel="noopener">
+      <a class="project-l project-l--featured" href="https://duluwa-art.vercel.app/" target="_blank" rel="noopener" data-preview="assets/previews/duluwa.webp">
         <div class="project-l__media">
           <div class="project-l__media-grid"></div>
           <div class="project-l__badge project-l__badge--art">Built from Scratch</div>
@@ -303,7 +303,7 @@
         </div>
       </a>
 
-      <a class="project-l" href="https://quiz-three-cyan.vercel.app/" target="_blank" rel="noopener">
+      <a class="project-l" href="https://quiz-three-cyan.vercel.app/" target="_blank" rel="noopener" data-preview="assets/previews/vivaprep.webp">
         <div class="project-l__media">
           <div class="project-l__media-grid"></div>
           <div class="project-l__media-content">
@@ -811,6 +811,39 @@
     e.preventDefault();
     const x = e.pageX - strip.offsetLeft;
     strip.scrollLeft = scrollL - (x - startX) * 1.2;
+  });
+})();
+
+/* ---- Project preview on hover ---- */
+(function () {
+  if (matchMedia('(pointer: coarse)').matches) return;
+  // Each [data-preview] card lazy-loads its screenshot (assets/previews/*.webp)
+  // on first hover, so the ~160KB of images never weigh down the initial load.
+  document.querySelectorAll('.project-l[data-preview]').forEach((card) => {
+    const media = card.querySelector('.project-l__media');
+    const src = card.getAttribute('data-preview');
+    if (!media || !src) return;
+    let mounted = false;
+    card.addEventListener('mouseenter', () => {
+      if (mounted) return;
+      mounted = true;
+      const layer = document.createElement('div');
+      layer.className = 'project-l__preview is-loading';
+      const img = document.createElement('img');
+      img.alt = 'Preview of ' + (card.querySelector('.project-l__title') || {}).textContent;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('load', () => layer.classList.remove('is-loading'));
+      // If the image is missing, drop the layer so the mockup shows through.
+      img.addEventListener('error', () => layer.remove());
+      const tag = document.createElement('span');
+      tag.className = 'project-l__preview-tag';
+      tag.textContent = 'Preview';
+      layer.appendChild(img);
+      layer.appendChild(tag);
+      media.appendChild(layer);
+      img.src = src;
+    });
   });
 })();
 
