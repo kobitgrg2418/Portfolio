@@ -350,7 +350,7 @@ export function apiBase() {
 
 export async function getPortfolio(): Promise<PortfolioPayload> {
   try {
-    const res = await fetch(`${apiBase()}/api/portfolio/`, { cache: "no-store" });
+    const res = await fetch(`${apiBase()}/api/portfolio/`);
     if (!res.ok) throw new Error("bad status");
     return (await res.json()) as PortfolioPayload;
   } catch {
