@@ -1,12 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  // Must match the Cloudflare Worker/project name (currently "portfolio").
-  // OpenNext previously used package.json "portfolio-frontend", which caused
-  // WORKER_SELF_REFERENCE to point at a Worker that does not exist.
   "name": "portfolio",
   "compatibility_date": "2025-09-21",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
