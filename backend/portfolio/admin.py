@@ -26,6 +26,11 @@ class ProfileAdminForm(forms.ModelForm):
         help_text="Enter one paragraph per line. Each line will become a separate paragraph on the site.",
         required=False,
     )
+    stats = forms.CharField(
+        widget=forms.Textarea(attrs={"rows": 5, "cols": 80}),
+        help_text="Enter one stat per line in format: 'number|label'. Example: '7+|Tools & frameworks'",
+        required=False,
+    )
 
     class Meta:
         model = Profile
@@ -38,6 +43,15 @@ class ProfileAdminForm(forms.ModelForm):
             self.fields["about_paragraphs"].initial = "\n\n".join(
                 self.instance.about_paragraphs
             )
+        if self.instance and isinstance(self.instance.stats, list):
+            # Convert list of dicts to "num|label" format
+            stats_text = []
+            for stat in self.instance.stats:
+                if isinstance(stat, dict):
+                    num = stat.get("num", "")
+                    label = stat.get("label", "")
+                    stats_text.append(f"{num}|{label}")
+            self.fields["stats"].initial = "\n".join(stats_text)
 
     def clean_about_paragraphs(self):
         raw = self.cleaned_data.get("about_paragraphs", "")
@@ -45,6 +59,17 @@ class ProfileAdminForm(forms.ModelForm):
         import re
         paragraphs = [p.strip() for p in re.split(r"\n\s*\n", raw) if p.strip()]
         return paragraphs
+
+    def clean_stats(self):
+        raw = self.cleaned_data.get("stats", "")
+        # Convert "num|label" format to list of dicts
+        stats = []
+        for line in raw.split("\n"):
+            line = line.strip()
+            if line and "|" in line:
+                parts = line.split("|", 1)
+                stats.append({"num": parts[0].strip(), "label": parts[1].strip()})
+        return stats
 
 
 @admin.register(Profile)
