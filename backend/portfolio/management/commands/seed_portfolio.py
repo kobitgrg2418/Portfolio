@@ -139,17 +139,17 @@ class Command(BaseCommand):
             [
                 TimelineItem(
                     order=0,
-                    meta="Sep 22, 2025 - Present",
-                    title="Everacy",
-                    subtitle="Full Stack Developer",
-                    body="Currently working as a full stack developer at Everacy, building and maintaining web applications using modern technologies.",
-                ),
-                TimelineItem(
-                    order=1,
                     meta="2026",
                     title="Duluwa_art",
                     subtitle="self made art gallery",
                     body="demo web from scratch",
+                ),
+                TimelineItem(
+                    order=1,
+                    meta="Sep 22, 2026 - Present",
+                    title="Everacy",
+                    subtitle="Full Stack Developer",
+                    body="Currently working as a full stack developer at Everacy, building and maintaining web applications using modern technologies.",
                 ),
             ]
         )
