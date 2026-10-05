@@ -649,11 +649,6 @@ export default function HomeClient({ data }: { data: PortfolioPayload }) {
         </div>
       </footer>
 
-      <a className="chat" href="#contact">
-        <span className="chat__dot" />
-        Let&apos;s chat
-      </a>
-
       <div className="mobile-nav" aria-label="Mobile navigation">
         <div className="mobile-nav__inner">
           <a href="#about">About</a>
